@@ -40,7 +40,9 @@ def mutate_invalid_string(string):
     if len(string) > 1:
         string = list(string)
         indices = list(range(len(string)))
-        random.shuffle(indices)  # Mezclar los índices para intercambiar posiciones al azar
+        random.shuffle(
+            indices
+        )  # Mezclar los índices para intercambiar posiciones al azar
 
         # Realizar múltiples intercambios en la cadena
         for _ in range(min(3, len(string) // 2)):
@@ -66,27 +68,36 @@ def generate_invalid_string(existing_strings, used_patterns):
     while True:
         prob = random.random()
         if prob < 0.75:  # 75% de probabilidad de usar la forma ya implementada
-            length = random.randint(4, 25)  # Aumentado el límite superior de caracteres
-            string = ''.join(random.choices('ab', k=length))  # Crea una cadena aleatoria de 'a' y 'b'
+            length = random.randint(
+                4, 25)  # Aumentado el límite superior de caracteres
+            string = ''.join(random.choices(
+                'ab', k=length))  # Crea una cadena aleatoria de 'a' y 'b'
         elif prob < 0.80:  # 5% de probabilidad de obtener solo 'a' o solo 'b'
             string = random.choice(['a', 'b']) * random.randint(1, 10)
         else:
             # Generar patrones repetitivos como "abababa", "aabaabaabaa", "bbabbabbabba", "aaabbb", "bbbaaa"
             available_patterns = ["ab", "aab", "bba", "aaabbb", "bbbaaa"]
             if len(used_patterns) < len(available_patterns):
-                pattern_type = random.choice([p for p in available_patterns if p not in used_patterns])
-                used_patterns.add(pattern_type)  # Registrar el patrón utilizado para evitar repeticiones
+                pattern_type = random.choice(
+                    [p for p in available_patterns if p not in used_patterns])
+                used_patterns.add(
+                    pattern_type
+                )  # Registrar el patrón utilizado para evitar repeticiones
             else:
-                pattern_type = random.choice(available_patterns)  # Si ya se usaron todos, permitir repetición
+                pattern_type = random.choice(
+                    available_patterns
+                )  # Si ya se usaron todos, permitir repetición
 
             length = random.randint(4, 25)
-            string = (pattern_type * (length // len(pattern_type) + 1))[:length]  # Ajusta la longitud
+            string = (pattern_type * (length // len(pattern_type) + 1)
+                      )[:length]  # Ajusta la longitud
 
         count_a = string.count('a')
         count_b = string.count('b')
 
         # Si la cadena generada sigue la forma válida a^n b^n, la invalida mediante mutación
-        if count_a == count_b and string[:count_a] == 'a' * count_a and string[count_a:] == 'b' * count_b:
+        if count_a == count_b and string[:count_a] == 'a' * count_a and string[
+                count_a:] == 'b' * count_b:
             string = mutate_invalid_string(string)
 
         if string not in existing_strings:  # Asegura que la cadena no se haya generado antes
@@ -102,12 +113,19 @@ def get_shuffled_strings():
     Retorna:
     list: Lista de 8 cadenas en orden aleatorio.
     """
-    random.seed(time.time())  # Cambia la semilla en cada ejecución para más variedad
-    existing_strings = set()  # Conjunto para almacenar cadenas generadas y evitar duplicados
+    random.seed(
+        time.time())  # Cambia la semilla en cada ejecución para más variedad
+    existing_strings = set(
+    )  # Conjunto para almacenar cadenas generadas y evitar duplicados
     used_patterns = set()  # Conjunto para almacenar patrones ya utilizados
 
-    valid_strings = [generate_valid_string(existing_strings) for _ in range(4)]  # Genera 4 cadenas válidas
-    invalid_strings = [generate_invalid_string(existing_strings, used_patterns) for _ in range(4)]  # Genera 4 cadenas inválidas
+    valid_strings = [
+        generate_valid_string(existing_strings) for _ in range(4)
+    ]  # Genera 4 cadenas válidas
+    invalid_strings = [
+        generate_invalid_string(existing_strings, used_patterns)
+        for _ in range(4)
+    ]  # Genera 4 cadenas inválidas
 
     # Mezclar las cadenas de forma aleatoria
     all_strings = valid_strings + invalid_strings
@@ -121,18 +139,25 @@ def main():
     """
     Función principal que genera y muestra cadenas válidas e inválidas.
     """
-    random.seed(time.time())  # Cambia la semilla en cada ejecución para más variedad
-    existing_strings = set()  # Conjunto para almacenar cadenas generadas y evitar duplicados
+    random.seed(
+        time.time())  # Cambia la semilla en cada ejecución para más variedad
+    existing_strings = set(
+    )  # Conjunto para almacenar cadenas generadas y evitar duplicados
     used_patterns = set()  # Conjunto para almacenar patrones ya utilizados
 
-    valid_strings = [generate_valid_string(existing_strings) for _ in range(4)]  # Genera 4 cadenas válidas
-    invalid_strings = [generate_invalid_string(existing_strings, used_patterns) for _ in range(4)]  # Genera 4 cadenas inválidas
+    valid_strings = [
+        generate_valid_string(existing_strings) for _ in range(4)
+    ]  # Genera 4 cadenas válidas
+    invalid_strings = [
+        generate_invalid_string(existing_strings, used_patterns)
+        for _ in range(4)
+    ]  # Genera 4 cadenas inválidas
 
-    print("Cadenas válidas:")
+    print("Valid chains:")
     for s in valid_strings:
         print(f"String: '{s}'")  # Imprime cada cadena válida
 
-    print("\nCadenas inválidas:")
+    print("\nInvalid chains:")
     for s in invalid_strings:
         print(f"String: '{s}'")  # Imprime cada cadena inválida
 

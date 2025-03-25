@@ -1,4 +1,4 @@
-from Scripts import Algorithm_1
+import ALGORITHM_1_LFCO_2025_DG_KM  # Importamos el archivo que genera las cadenas
 
 
 class PDA:
@@ -72,12 +72,12 @@ def main():
     pda = PDA()
 
     # Obtener las cadenas generadas desde Algorithm_1
-    strings = Algorithm_1.get_shuffled_strings()
+    strings = ALGORITHM_1_LFCO_2025_DG_KM.get_shuffled_strings()
 
-    print("Resultados del análisis por el PDA:")
+    print("Results of the analysis by PDA:")
     for s in strings:
-        resultado = "es aceptado" if pda.process_string(s) else "es rechazado"
-        print(f"String: '{s}' {resultado} por el PDA.")
+        resultado = "is accepted" if pda.process_string(s) else "is rejected"
+        print(f"String: '{s}' {resultado} by the PDA.")
 
 
 if __name__ == "__main__":

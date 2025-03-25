@@ -1,7 +1,8 @@
-from Scripts import Algorithm_1, Algorithm_2
+import ALGORITHM_1_LFCO_2025_DG_KM
+import ALGORITHM_2_LFCO_2025_DG_KM
 from tabulate import tabulate
 
-class PDA_Tracer(Algorithm_2.PDA):
+class PDA_Tracer(ALGORITHM_2_LFCO_2025_DG_KM.PDA):
     """
     Extiende la clase PDA para registrar la ejecución del autómata,
     guardando el historial de transiciones, cambios en la pila y reglas aplicadas.
@@ -36,7 +37,7 @@ class PDA_Tracer(Algorithm_2.PDA):
             state = self.process_symbol(state, symbol)
             if state is None:
                 return False
-        self.history.append([self.input_string, ''.join(self.stack), "Final"])
+        self.history.append([self.input_string, ''.join(self.stack), "end"])
         return len(self.stack) == 0
 
     def get_rule(self, state, symbol):
@@ -54,7 +55,7 @@ def display_rules(pda_tracer):
     """
     Muestra las reglas del PDA enumeradas antes de procesar las cadenas.
     """
-    print("\nReglas del PDA:")
+    print("\nPDA Rules:")
     for num, rule in pda_tracer.rules.items():
         print(f"{num}: {rule}")
 
@@ -66,7 +67,7 @@ def display_trace(input_string, tracer):
     for index, (tree, stack, rule) in enumerate(tracer.history):
         table_data.append([index, tree, stack, rule])
 
-    print(f"\nCadena aceptada: {input_string}")
+    print(f"\nAccepted string: {input_string}")
     print(tabulate(table_data, headers=["Tree", "Stack", "Rules"], tablefmt="grid"))
 
 def main():
@@ -78,8 +79,8 @@ def main():
     # Mostrar reglas antes de procesar las cadenas
     display_rules(pda_tracer)
 
-    generated_strings = Algorithm_1.get_shuffled_strings()
-    accepted_strings = [s for s in generated_strings if Algorithm_2.PDA().process_string(s)]
+    generated_strings = ALGORITHM_1_LFCO_2025_DG_KM.get_shuffled_strings()
+    accepted_strings = [s for s in generated_strings if ALGORITHM_2_LFCO_2025_DG_KM.PDA().process_string(s)]
 
     for string in accepted_strings:
         pda_tracer.process_string(string)
