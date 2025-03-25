@@ -122,4 +122,55 @@ String: 'abab' es rechazado por el PDA.
 String: 'aaabb' es rechazado por el PDA.
 ```
 
+# ALGORITMO#3 PDA Tracer
+
+## Descripción
+Este código implementa un Autómata de Pila Determinista (PDA) que procesa cadenas generadas por `Algorithm_1` y filtradas por `Algorithm_2`. Además, registra la ejecución paso a paso, mostrando las reglas aplicadas, cambios en la pila y configuraciones del autómata.
+
+## Requisitos
+Para ejecutar el código, es necesario instalar las siguientes librerías:
+
+```sh
+pip install tabulate matplotlib networkx
+```
+
+## Archivos
+- `Algorithm_1.py`: Genera cadenas aleatorias basadas en una gramática específica.
+- `Algorithm_2.py`: Filtra las cadenas generadas por `Algorithm_1`.
+- `Algorithm_3.py`: Implementa el PDA con trazabilidad y visualización de reglas aplicadas.
+
+## Uso
+Ejecuta `Algorithm_3.py` para procesar las cadenas y visualizar el historial de transiciones:
+
+```sh
+python Algorithm_3.py
+```
+
+El programa mostrará:
+1. Las reglas del PDA.
+2. Las cadenas aceptadas.
+3. Un registro detallado del proceso paso a paso en formato de tabla.
+
+## Salida esperada
+Ejemplo de salida del programa:
+```
+Reglas del PDA:
+1: (q0, a) -> push
+2: (q0, b) -> pop
+3: (q1, b) -> pop
+
+Cadena aceptada: aabb
++--------+-------+--------------+
+| Tree   | Stack | Rules        |
++--------+-------+--------------+
+| aabb   | a     | (q0, a) -> push |
+| abb    | aa    | (q0, a) -> push |
+| bb     | a     | (q0, b) -> pop  |
+| b      |       | (q1, b) -> pop  |
+|        |       | Final         |
++--------+-------+--------------+
+```
+
+
+
 
