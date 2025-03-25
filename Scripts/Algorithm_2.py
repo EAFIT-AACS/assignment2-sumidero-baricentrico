@@ -1,4 +1,4 @@
-import Algorithm_1  # Importamos el archivo que genera las cadenas
+from Scripts import Algorithm_1
 
 
 class PDA:

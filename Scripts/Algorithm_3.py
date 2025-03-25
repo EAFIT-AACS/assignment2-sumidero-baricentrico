@@ -1,5 +1,4 @@
-import Algorithm_1
-import Algorithm_2
+from Scripts import Algorithm_1, Algorithm_2
 from tabulate import tabulate
 
 class PDA_Tracer(Algorithm_2.PDA):
