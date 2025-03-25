@@ -131,7 +131,7 @@ Este código implementa un Autómata de Pila Determinista (PDA) que procesa cade
 Para ejecutar el código, es necesario instalar las siguientes librerías:
 
 ```sh
-pip install tabulate matplotlib networkx
+pip install tabulate
 ```
 
 ## Archivos
